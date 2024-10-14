@@ -9,13 +9,22 @@ function setup() {
   
   // Imposta la modalità degli angoli in gradi (anziché radianti)
   angleMode(DEGREES);
-
+  
   // Imposta lo spessore del bordo dei rettangoli
   strokeWeight(3);
-  
+
   // Per rimuovere il bordo dei rettangoli, puoi attivare questa linea
   // noStroke();
 
+  // Imposta il background iniziale
+  updateBackground();
+
+  // Imposta un intervallo per aggiornare l'immagine ogni 3 secondi
+  setInterval(updateBackground, 3000);
+}
+
+// Funzione per aggiornare il background e disegnare i rettangoli
+function updateBackground() {
   // Genera casualmente valori di colore iniziali per il rosso, verde e blu
   startR = random(165);
   startG = random(165);
@@ -25,11 +34,9 @@ function setup() {
   background(startR + 45, startG + 45, startB + 45);
 
   // Ciclo per creare i rettangoli orizzontalmente
-  //condizione: il ciclo si fermerà quando il valore di x sarà minore o uguale a -size * molt_larghezza.
-  //iterazione: sottrae size dal valore attuale di x
-  for (x = width; x > -size * molt_larghezza; x -= size) {
+  for (let x = width; x > -size * molt_larghezza; x -= size) {
     // Ciclo per creare i rettangoli verticalmente
-    for (y = height; y > -size * molt_altezza; y -= size) {
+    for (let y = height; y > -size * molt_altezza; y -= size) {
       
       // Riempie i rettangoli con colori casuali, basati sui colori iniziali
       fill(
@@ -44,9 +51,6 @@ function setup() {
       // Trasla il sistema di coordinate per posizionare il centro del rettangolo
       translate(x + size / 2, y + size / 2);
       
-      // Ruota il rettangolo in angoli multipli di 45 gradi (puoi attivare questo codice togliendo il commento)
-      //rotate(floor(random(8)) * 45); // Prova a decommentare questa linea per vedere l'effetto della rotazione
-
       // Disegna un rettangolo con larghezza e altezza casuali, in base alla dimensione e ai moltiplicatori
       rect(
         0,
@@ -67,5 +71,3 @@ function keyTyped() {
     save("myCanvas.jpg"); // Salva il canvas come immagine con il nome 'myCanvas.jpg'
   }
 }
-
-
